@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Portfólio de Smile Ferreira, especialista em marketing e growth com mais de 10 anos de experiência em performance, e-commerce e análise de dados.">
+    <meta name="keywords" content="marketing, growth hacking, e-commerce, performance, portfólio, fintech, automotivo, varejo">
+    <meta name="author" content="Smile Ferreira">
+    <meta name="robots" content="index, follow">
+    <title>Portfólio Interativo | Smile Ferreira - Especialista em Marketing e Growth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        .hero-pattern {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            background-size: 24px 24px;
+            background-image: linear-gradient(to right, rgba(226, 232, 240, 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(226, 232, 240, 0.3) 1px, #f8fafc 1px);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-pattern::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            animation: pulse-bg 10s infinite ease-in-out;
+            z-index: 0;
+        }
+        @keyframes pulse-bg {
+            0% { transform: scale(0.8); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0; }
+            100% { transform: scale(0.8); opacity: 0.3; }
+        }
+        .slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+        }
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+        .slide {
+            flex: 0 0 auto;
+            width: 280px;
+            margin-right: 1.5rem;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        @media (min-width: 640px) {
+            .slide { width: 320px; }
+        }
+        @media (min-width: 1024px) {
+            .slide { width: 340px; }
+        }
+        .slide:hover {
+            transform: translateY(-10px) scale(1.03);
+            z-index: 10;
+        }
+        .slide-card, .cert-slide-card {
+            background: linear-gradient(145deg, #ffffff, #f9fafb);
+            border-radius: 1.5rem;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06), 0 8px 8px rgba(0, 0, 0, 0.03);
+            padding: 1.75rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+        .slide-card::before, .cert-slide-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            animation: pulse 12s infinite;
+            z-index: 0;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.5); opacity: 0.4; }
+            50% { transform: scale(1.3); opacity: 0; }
+            100% { transform: scale(0.5); opacity: 0.4; }
+        }
+        .text-gradient {
+            background: linear-gradient(90deg, #3b82f6, #9333ea);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem 0;
+        }
+        .skill-card {
+            background: #ffffff;
+            border-radius: 1rem;
+            padding: 1.25rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+        }
+        .dark .slide-card,
+        .dark .cert-slide-card,
+        .dark .skill-card {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border-color: #334155;
+        }
+        .dark .slide-card::before,
+        .dark .cert-slide-card::before {
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col" x-data="{ open: false, darkMode: false }" x-init="darkMode = localStorage.getItem('darkMode') === 'true'; $watch('darkMode', value => localStorage.setItem('darkMode', value))" :class="darkMode ? 'dark bg-slate-900 text-slate-200' : ''">
+    <div class="fixed top-4 right-4 z-50">
+        <button @click="darkMode = !darkMode" class="bg-gray-200 dark:bg-gray-700 p-2 rounded-full shadow-md hover:shadow-lg transition-all">
+            <svg x-show="!darkMode" class="w-6 h-6 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg x-show="darkMode" class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.121a1 1 0 00-1.415 1.414l.707.707a1 1 0 001.414-1.414l-.707-.707zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 101.414 1.414l.707-.707a1 1 0 10-1.414-1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path>
+            </svg>
+        </button>
+    </div>
+    <header class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200 dark:border-gray-700">
+        <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-slate-900 dark:text-white flex items-center">
+                <span class="text-gradient">Smile</span> Ferreira
+            </a>
+            <div class="md:hidden">
+                <button @click="open = !open" class="text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#sobre" class="text-slate-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Sobre</a>
+                <a href="#projetos" class="text-slate-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Projetos</a>
+                <a href="#certificacoes" class="text-slate-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Certificações</a>
+                <a href="#habilidades" class="text-slate-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Habilidades</a>
+                <a href="#contato" class="bg-blue-600 dark:bg-blue-700 text-white px-5 py-2 rounded-xl hover:bg-blue-700 dark:hover:bg-blue-600 transition-all shadow-md hover:shadow-lg font-semibold">Contato</a>
+            </div>
+            <div x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute top-full left-0 w-full md:hidden bg-white dark:bg-gray-800 shadow-lg py-4 rounded-b-xl">
+                <a href="#sobre" class="block px-6 py-2 text-slate-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Sobre</a>
+                <a href="#projetos" class="block px-6 py-2 text-slate-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Projetos</a>
+                <a href="#certificacoes" class="block px-6 py-2 text-slate-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Certificações</a>
+                <a href="#habilidades" class="block px-6 py-2 text-slate-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">Habilidades</a>
+                <a href="#contato" class="block px-6 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-xl hover:bg-blue-700 dark:hover:bg-blue-600 transition-all shadow-md mt-2 mx-4">Contato</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-12 md:py-20 flex-grow">
+
+        <!-- Hero Section -->
+        <section id="sobre" class="text-center hero-pattern -mx-6 -mt-12 md:-mt-20 px-6 py-24 md:py-32 rounded-b-3xl mb-20 relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
+                    <span class="text-gradient">Líder</span> em Marketing & Growth
+                </h1>
+                <p class="text-lg md:text-xl text-slate-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">Com mais de 10 anos de experiência, escalo resultados para marcas líderes em performance digital, e-commerce e análise de dados. Especialista em estratégias inovadoras e liderança de equipes multifuncionais.</p>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="#projetos" class="bg-blue-600 dark:bg-blue-700 text-white px-6 py-3 rounded-xl hover:bg-blue-700 dark:hover:bg-blue-600 transition-all shadow-lg hover:shadow-xl text-lg font-semibold w-full sm:w-auto text-center">Ver Projetos</a>
+                    <a href="https://linkedin.com/in/smilenfc" target="_blank" class="bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 px-6 py-3 rounded-xl hover:bg-blue-50 dark:hover:bg-gray-700 transition-all shadow-lg hover:shadow-xl text-lg font-semibold border border-slate-200 dark:border-gray-600 w-full sm:w-auto text-center">LinkedIn</a>
+                    <a href="#contato" class="bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition-all shadow-lg hover:shadow-xl text-lg font-semibold w-full sm:w-auto text-center">Contratar</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projetos" class="mt-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-slate-900 dark:text-white">Projetos de Destaque</h2>
+            <div class="space-y-20">
+                <!-- Fintech & Serviços Financeiros -->
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-semibold text-left text-slate-800 dark:text-gray-200 mb-8 border-b pb-4 border-slate-200 dark:border-gray-700">Fintech & Serviços Financeiros</h3>
+                    <div class="slider-container" x-data="{ currentIndex: 0 }" x-init="setInterval(() => currentIndex = (currentIndex + 1) % 15, 5000)" data-slider="fintech">
+                        <div class="slider-wrapper" x-bind:style="'transform: translateX(-' + currentIndex * (320 + 24) + 'px)'">
+                            <div class="slide" x-for="item in fintechProjects" :key="item.name">
+                                <div class="slide-card">
+                                    <img :src="'https://cdn.simpleicons.org/' + item.logo" class="h-12 w-12 mb-6 object-contain" :alt="'Logo da ' + item.name">
+                                    <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">{{ item.name }}</h4>
+                                    <p class="text-slate-600 dark:text-gray-400 mb-4 font-medium">{{ item.title }}</p>
+                                    <p class="text-slate-700 dark:text-gray-300 mb-5 text-sm flex-grow"><strong class="font-semibold">Estratégia:</strong> {{ item.strategy }}</p>
+                                    <div class="bg-emerald-100 dark:bg-emerald-900/50 text-emerald-900 dark:text-emerald-100 p-4 rounded-xl mt-auto text-center">
+                                        <p class="font-extrabold text-2xl">{{ item.result }}</p>
+                                        <p class="text-sm font-medium">{{ item.sub }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button @click="currentIndex = (currentIndex - 1 + 15) % 15" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 p-2 rounded-full shadow-md hover:shadow-lg -ml-6 z-10">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button @click="currentIndex = (currentIndex + 1) % 15" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 p-2 rounded-full shadow-md hover:shadow-lg -mr-6 z-10">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Varejo, E-commerce & Tecnologia -->
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-semibold text-left text-slate-800 dark:text-gray-200 mb-8 border-b pb-4 border-slate-200 dark:border-gray-700">Varejo, E-commerce & Tecnologia</h3>
+                    <div class="slider-container" x-data="{ currentIndex: 0 }" x-init="setInterval(() => currentIndex = (currentIndex + 1) % 17, 5000)" data-slider="varejo">
+                        <div class="slider-wrapper" x-bind:style="'transform: translateX(-' + currentIndex * (320 + 24) + 'px)'">
+                            <div class="slide" x-for="item in varejoProjects" :key="item.name">
+                                <div class="slide-card">
+                                    <img :src="'https://cdn.simpleicons.org/' + item.logo" class="h-12 w-12 mb-6 object-contain" :alt="'Logo da ' + item.name">
+                                    <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">{{ item.name }}</h4>
+                                    <p class="text-slate-600 dark:text-gray-400 mb-4 font-medium">{{ item.title }}</p>
+                                    <p class="text-slate-700 dark:text-gray-300 mb-5 text-sm flex-grow"><strong class="font-semibold">Estratégia:</strong> {{ item.strategy }}</p>
+                                    <div class="bg-emerald-100 dark:bg-emerald-900/50 text-emerald-900 dark:text-emerald-100 p-4 rounded-xl mt-auto text-center">
+                                        <p class="font-extrabold text-2xl">{{ item.result }}</p>
+                                        <p class="text-sm font-medium">{{ item.sub }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button @click="currentIndex = (currentIndex - 1 + 17) % 17" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 p-2 rounded-full shadow-md hover:shadow-lg -ml-6 z-10">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button @click="currentIndex = (currentIndex + 1) % 17" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 p-2 rounded-full shadow-md hover:shadow-lg -mr-6 z-10">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Indústria Automotiva -->
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-semibold text-left text-slate-800 dark:text-gray-200 mb-8 border-b pb-4 border-slate-200 dark:border-gray-700">Indústria Automotiva</h3>
+                    <div class="slider-container" x-data="{ currentIndex: 0 }" x-init="setInterval(() => currentIndex = (currentIndex + 1) % 15, 5000)" data-slider="auto">
+                        <div class="slider-wrapper" x-bind:style="'transform: translateX(-' + currentIndex * (320 + 24) + 'px)'">
+                            <div class="slide" x-for="item in autoProjects" :key="item.name">
+                                <div class="slide-card">
+                                    <img :src="'https://cdn.simpleicons.org/' + item.logo" class="h-12 w-12 mb-6 object-contain" :alt="'Logo da ' + item.name">
+                                    <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">{{ item.name }}</h4>
+                                    <p class="text-slate-600 dark:text-gray-400 mb-4 font-medium">{{ item.title }}</p>
+                                    <p class="text-slate-700 dark:text-gray-300 mb-5 text-sm flex-grow"><strong class="font-semibold">Estratégia:</strong> {{ item.strategy }}</p>
+                                    <div class="bg-emerald-100 dark:bg-emerald-900/50 text-emerald-900 dark:text-emerald-100 p-4 rounded-xl mt-auto text-center">
+                                        <p class="font-extrabold text-2xl">{{ item.result }}</p>
+                                        <p class="text-sm font-medium">{{ item.sub }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button @click="currentIndex = (currentIndex - 1 + 15) % 15" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 p-2 rounded-full shadow-md hover:shadow-lg -ml-6 z-10">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button @click="currentIndex = (currentIndex + 1) % 15" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 p-2 rounded-full shadow-md hover:shadow-lg -mr-6 z-10">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Delivery -->
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-semibold text-left text-slate-800 dark:text-gray-200 mb-8 border-b pb-4 border-slate-200 dark:border-gray-700">Delivery</h3>
+                    <div class="slider-container" x-data="{ currentIndex: 0 }" x-init="setInterval(() => currentIndex = (currentIndex + 1) % 11, 5000)" data-slider="delivery">
+                        <div class="slider-wrapper" x-bind:style="'transform: translateX(-' + currentIndex * (320 + 24) + 'px)'">
+                            <div class="slide" x-for="item in deliveryProjects" :key="item.name">
+                                <div class="slide-card">
+                                    <img :src="'https://cdn.simpleicons.org/' + item.logo" class="h-12 w-12 mb-6 object-contain" :alt="'Logo da ' + item.name">
+                                    <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">{{ item.name }}</h4>
+                                    <p class="text-slate-600 dark:text-gray-400 mb-4 font-medium">{{ item.title }}</p>
+                                    <p class="text-slate-700 dark:text-gray-300 mb-5 text-sm flex-grow"><strong class="font-semibold">Estratégia:</strong> {{ item.strategy }}</p>
+                                    <div class="bg-emerald-100 dark:bg-emerald-900/50 text-emerald-900 dark:text-emerald-100 p-4 rounded-xl mt-auto text-center">
+                                        <p class="font-extrabold text-2xl">{{ item.result }}</p>
+                                        <p class="text-sm font-medium">{{ item.sub }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button @click="currentIndex = (currentIndex - 1 + 11) % 11" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 p-2 rounded-full shadow-md hover:shadow-lg -ml-6 z-10">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button @click="currentIndex = (currentIndex + 1) % 11" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 p-2 rounded-full shadow-md hover:shadow-lg -mr-6 z-10">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certificacoes" class="mt-20 md:mt-32">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-slate-900 dark:text-white">Certificações e Domínio de Plataformas</h2>
+            <div class="slider-container" x-data="{ currentIndex: 0 }" x-init="setInterval(() => currentIndex = (currentIndex + 1) % 16, 5000)" data-slider="certs">
+                <div class="slider-wrapper" x-bind:style="'transform: translateX(-' + currentIndex * (320 + 24) + 'px)'">
+                    <div class="slide" x-for="cert in certifications" :key="cert.name">
+                        <div class="slide-card cert-slide-card">
+                            <img :src="'https://cdn.simpleicons.org/' + cert.logo" alt="Logo de {{ cert.name }}" class="h-20 w-20 mx-auto mb-6 object-contain">
+                            <h3 class="font-bold text-xl md:text-2xl text-slate-900 dark:text-white mb-3">{{ cert.name }}</h3>
+                            <p class="text-slate-600 dark:text-gray-400 text-center text-sm md:text-base">{{ cert.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                <button @click="currentIndex = (currentIndex - 1 + 16) % 16" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 p-2 rounded-full shadow-md hover:shadow-lg -ml-6 z-10">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button @click="currentIndex = (currentIndex + 1) % 16" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 p-2 rounded-full shadow-md hover:shadow-lg -mr-6 z-10">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="habilidades" class="mt-20 md:mt-32">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-slate-900 dark:text-white">Habilidades</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h4 class="font-semibold text-lg text-slate-800 dark:text-gray-200">Growth Marketing</h4>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 mt-2">Growth Hacking, CRO, Geração de Leads, Lead Scoring, SQLs, Testes A/B</p>
+                </div>
+                <div class="skill-card">
+                    <h4 class="font-semibold text-lg text-slate-800 dark:text-gray-200">Marketing Digital</h4>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 mt-2">Estratégia, Conteúdo, Redes Sociais, Influenciadores, E-commerce, Trade Digital</p>
+                </div>
+                <div class="skill-card">
+                    <h4 class="font-semibold text-lg text-slate-800 dark:text-gray-200">Mídia Paga</h4>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 mt-2">Google Ads, Meta Ads, Microsoft Ads, LinkedIn Ads, TikTok Ads, Pinterest Ads, X Ads, Kwai Ads, Taboola, Snapchat Ads, Reddit Ads, Quora Ads</p>
+                </div>
+                <div class="skill-card">
+                    <h4 class="font-semibold text-lg text-slate-800 dark:text-gray-200">Martech & CRM</h4>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 mt-2">HubSpot, Salesforce Marketing Cloud, RD Station, Agendor, Zapier, Make, Marketo Engage, Zoho CRM, ActiveCampaign</p>
+                </div>
+                <div class="skill-card">
+                    <h4 class="font-semibold text-lg text-slate-800 dark:text-gray-200">Análise de Dados</h4>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 mt-2">Google Analytics 4, Power BI, Looker Studio, SQL, Comscore, CAC, LTV, CPA, ROAS, CTR, Tableau, AWS Data Analytics</p>
+                </div>
+                <div class="skill-card">
+                    <h4 class="font-semibold text-lg text-slate-800 dark:text-gray-200">SEO & SEM</h4>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 mt-2">Semrush, Ahrefs, SEO, WordPress, Wix, Google Tag Manager, Bing Ads, Yoast SEO</p>
+                </div>
+                <div class="skill-card">
+                    <h4 class="font-semibold text-lg text-slate-800 dark:text-gray-200">Design & Conteúdo</h4>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 mt-2">Canva, CapCut, Photoshop, Edição de Vídeo, Landing Pages, Premiere Pro, Figma</p>
+                </div>
+                <div class="skill-card">
+                    <h4 class="font-semibold text-lg text-slate-800 dark:text-gray-200">Gestão</h4>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 mt-2">Liderança, Colaboração Multifuncional, Gestão de Projetos, Planejamento de Campanhas, Gestão de Stakeholders, Scrum, PRINCE2</p>
+                </div>
+                <div class="skill-card">
+                    <h4 class="font-semibold text-lg text-slate-800 dark:text-gray-200">Comportamentais</h4>
+                    <p class="text-sm text-slate-600 dark:text-gray-400 mt-2">Senso de Dono, Adaptabilidade, Pensamento Analítico, Comunicação Clara, Proatividade, Resiliência, Inteligência Emocional, Liderança Situacional</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contato" class="mt-20 md:mt-32 py-12 bg-slate-100 dark:bg-gray-800 rounded-2xl shadow-lg">
+            <div class="container mx-auto px-4 sm:px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-slate-900 dark:text-white">Vamos Trabalhar Juntos?</h2>
+                <p class="text-lg md:text-xl text-slate-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">Entre em contato para discutir oportunidades, parcerias ou projetos. Estou disponível para transformar suas ideias em resultados.</p>
+                <form action="mailto:smillepls@icloud.com" method="POST" enctype="text/plain" class="max-w-lg mx-auto space-y-4">
+                    <input type="text" name="name" placeholder="Seu Nome" required class="w-full px-4 py-2 border border-slate-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all">
+                    <input type="email" name="email" placeholder="Seu E-mail" required class="w-full px-4 py-2 border border-slate-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all">
+                    <textarea name="message" placeholder="Sua Mensagem" rows="4" required class="w-full px-4 py-2 border border-slate-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"></textarea>
+                    <button type="submit" class="w-full bg-blue-600 dark:bg-blue-700 text-white px-6 py-3 rounded-xl hover:bg-blue-700 dark:hover:bg-blue-600 transition-all shadow-md hover:shadow-lg font-semibold">Enviar Mensagem</button>
+                </form>
+                <div class="mt-10 text-slate-500 dark:text-gray-400 text-sm">
+                    <p>Última atualização: 24/06/2025, 11:17 AM -03</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 dark:bg-gray-800 text-white py-12 mt-20">
+        <div class="container mx-auto px-4 sm:px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Fique Conectado</h2>
+            <p class="text-slate-300 dark:text-gray-400 max-w-2xl mx-auto mb-8">Siga-me nas redes sociais ou envie um e-mail para explorar colaborações.</p>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="https://linkedin.com/in/smilenfc" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-1.337-.026-3.057-1.852-3.057-1.853 0-2.136 1.445-2.136 2.939v5.722h-3v-11h2.878v1.523h.044c.397-.753 1.369-1.543 2.815-1.543 3.031 0 3.594 1.988 3.594 4.583v6.437z"/></svg>
+                </a>
+                <a href="mailto:smillepls@icloud.com" class="text-red-400 hover:text-red-300 transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-gray-300 transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.618 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.057-1.645.069-4.849.069s-3.584-.012-4.849-.069c-3.263-.149-4.771-1.699-4.919-4.919-.057-1.265-.069-1.644-.069-4.849 0-3.204.012-3.584.069-4.849.149-3.252 1.694-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.013-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.072 1.687-.072 4.947 0 3.259.013 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.687.072 4.947.072 3.259 0 3.668-.013 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.072-1.689.072-4.948 0-3.259-.013-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.072-4.947-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.645-1.439 1.44-1.439.794 0 1.44.645 1.44 1.439z"/></svg>
+                </a>
+            </div>
+            <div class="mt-10 text-slate-400 dark:text-gray-500 text-sm">
+                <p>© 2025 Smile Ferreira. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            // Dados dos Projetos
+            const fintechProjects = [
+                { logo: 'xpinc/000000', name: 'XP Inc.', title: 'Aquisição de Clientes de Alta Renda', strategy: 'Campanhas no LinkedIn Ads, webinars e funis de nutrição automatizados no Salesforce.', result: '+R$ 50M', sub: 'em Novos Investimentos Captados' },
+                { logo: 'nubank/820AD1', name: 'Nubank', title: 'Lançamento de Produto', strategy: 'Marketing de influência (YouTube/TikTok), campanhas de e-mail e testes A/B no onboarding.', result: '-40%', sub: 'no Custo por Cliente (CAC)' },
+                { logo: 'c6bank/000000', name: 'C6 Bank', title: 'Adoção da Conta Global', strategy: 'Retargeting no Google Ads, conteúdo para viajantes e parcerias.', result: '2.5x', sub: 'Mais Aberturas de Contas' },
+                { logo: 'btgpactual/004058', name: 'BTG Pactual', title: 'Geração de Leads B2B', strategy: 'Conteúdo de marca em portais financeiros e campanhas de search/remarketing.', result: '+300%', sub: 'em Leads para o Time Comercial' },
+                { logo: 'stonepagamentos/00A99D', name: 'Stone', title: 'Redução de Churn de PMEs', strategy: 'Réguas de relacionamento em CRM, conteúdo educativo e ofertas personalizadas.', result: '-25%', sub: 'na Taxa de Churn em 6 meses' },
+                { logo: 'pagseguro/FFC800', name: 'PagBank', title: 'Cross-sell de Produtos Financeiros', strategy: 'Análise de dados transacionais e campanhas in-app para ofertar crédito e investimentos.', result: '1.5x', sub: 'Aumento no LTV do Cliente' },
+                { logo: 'itauunibanco/EC7000', name: 'Itaú Unibanco', title: 'Digitalização de Abertura de Contas', strategy: 'Otimização da UX/UI, campanhas de performance e retargeting para cadastros incompletos.', result: '+1M', sub: 'Novas Contas Digitais em 1 Ano' },
+                { logo: 'bradesco/CC092F', name: 'Bradesco', title: 'Adoção do App Next', strategy: 'Campanhas de aquisição no TikTok e parcerias com micro-influenciadores universitários.', result: '+2M', sub: 'Novos Usuários Ativos' },
+                { logo: 'inter/FF0000', name: 'Banco Inter', title: 'Expansão de Serviços Digitais', strategy: 'Campanhas multicanal (Google, Meta) e automação de CRM para upsell.', result: '+30%', sub: 'em Adoção de Serviços' },
+                { logo: 'mercado/FFE600', name: 'Mercado Pago', title: 'Aumento de Usuários Ativos', strategy: 'Campanhas de cashback e integração com e-commerce.', result: '+5M', sub: 'Usuários em 6 Meses' },
+                { logo: 'picpay/00C853', name: 'PicPay', title: 'Engajamento de Usuários', strategy: 'Gamificação e parcerias com marcas locais.', result: '+45%', sub: 'em Engajamento' },
+                { logo: 'wise/00AEEF', name: 'Wise', title: 'Crescimento Internacional', strategy: 'SEO global e campanhas de awareness em redes sociais.', result: '2x', sub: 'em Mercado Internacional' },
+                { logo: 'nomad/000000', name: 'Nomad', title: 'Lançamento de Conta em Dólar', strategy: 'Conteúdo educativo e campanhas segmentadas.', result: '+100K', sub: 'Contas Abertas' },
+                { logo: 'recargapay/FF9800', name: 'RecargaPay', title: 'Aumento de Transações', strategy: 'Promoções em app e parcerias com varejo.', result: '+60%', sub: 'em Volume de Transações' },
+                { logo: 'oramainvest/000000', name: 'Órama', title: 'Educação Financeira', strategy: 'Webinars e conteúdo em vídeo, com SEO otimizado.', result: '+250K', sub: 'Visitantes Únicos' }
+            ];
+
+            const varejoProjects = [
+                { logo: 'mercadolibre/FFE600', name: 'Mercado Livre', title: 'Otimização da Conversão', strategy: 'Testes A/B em páginas de produto, SEO e automação para recuperação de carrinho.', result: '+20%', sub: 'na Taxa de Conversão' },
+                { logo: 'magazineluiza/0086FF', name: 'Magazine Luiza', title: 'Aumento da Frequência', strategy: 'Programa de fidelidade, segmentação avançada e campanhas personalizadas.', result: '+35%', sub: 'na Taxa de Recompra' },
+                { logo: 'ifood/EA1D2C', name: 'iFood', title: 'Aumento do Ticket Médio', strategy: 'Campanhas de "compre junto", cupons progressivos e CRM para sugerir itens.', result: '+15%', sub: 'no Valor do Pedido Médio' },
+                { logo: 'microsoft/0078D4', name: 'Microsoft', title: 'Geração de Leads (Azure)', strategy: 'Campanhas no LinkedIn Ads, whitepapers e nutrição de leads via Marketo.', result: '+400%', sub: 'em Leads Qualificados' },
+                { logo: 'apple/000000', name: 'Apple', title: 'Lançamento de Novo iPhone', strategy: 'Campanhas de antecipação, conteúdo exclusivo com influenciadores e plano de mídia para pré-venda.', result: 'Recorde', sub: 'de Vendas no Primeiro Fim de Semana' },
+                { logo: 'samsung/1428A0', name: 'Samsung', title: 'Campanha de Lançamento', strategy: 'Teasers, parcerias com influenciadores de tecnologia e campanhas de pré-venda com bônus.', result: '1.5M', sub: 'Unidades Vendidas na Pré-venda' },
+                { logo: 'kabum!/FF6600', name: 'KaBuM!', title: 'Performance em Datas Sazonais', strategy: 'Planejamento para Black Friday, com foco em Google Shopping, PMax e remarketing dinâmico.', result: '10:1', sub: 'de ROAS na Black Friday' },
+                { logo: 'amazon/FF9900', name: 'Amazon', title: 'Crescimento do Prime Video', strategy: 'Campanhas de mídia em redes sociais e parcerias de conteúdo para promover séries originais.', result: '+5M', sub: 'Novos Assinantes em 1 Trimestre' },
+                { logo: 'shopee/F53D2D', name: 'Shopee', title: 'Reestruturação do Funil de Vendas', strategy: 'Otimização com SEO/SEM/CRM e campanhas multicanal (Google, Meta, TikTok).', result: '+R$ 70M', sub: 'em Vendas Incrementais' },
+                { logo: 'americanas/E60014', name: 'Americanas', title: 'Estratégia Omnichannel', strategy: 'Integração de campanhas online com ofertas "pegue na loja" e análise de dados geolocalizados.', result: '+40%', sub: 'em Vendas "Clique e Retire"' },
+                { logo: 'netshoes/000000', name: 'Netshoes', title: 'Personalização de Ofertas', strategy: 'Segmentação com IA e e-mails personalizados via CRM.', result: '+25%', sub: 'em Taxa de Clique' },
+                { logo: 'renner/FF1493', name: 'Renner', title: 'Engajamento em Redes', strategy: 'Campanhas com influenciadores e UGC (User Generated Content).', result: '+500K', sub: 'Interações' },
+                { logo: 'centauro/FF4500', name: 'Centauro', title: 'Otimização de Estoque', strategy: 'Análise de dados e campanhas sazonais.', result: '-20%', sub: 'em Estoque Não Vendido' },
+                { logo: 'casasbahia/00AEEF', name: 'Casas Bahia', title: 'Expansão Online', strategy: 'SEO e campanhas de performance em datas sazonais.', result: '+30%', sub: 'em Vendas Online' },
+                { logo: 'pontofrio/0000FF', name: 'Pontofrio', title: 'Retargeting Avançado', strategy: 'Remarketing dinâmico e upsell via e-mail.', result: '+15%', sub: 'em Conversão' },
+                { logo: 'submarino/FF00FF', name: 'Submarino', title: 'Aumento de Tráfego', strategy: 'SEO otimizado e campanhas de awareness.', result: '+2M', sub: 'Visitantes Mensais' },
+                { logo: 'rihappy/FF69B4', name: 'Ri Happy', title: 'Campanha Infantil', strategy: 'Parcerias com youtubers kids e promoções sazonais.', result: '+50%', sub: 'em Vendas de Brinquedos' }
+            ];
+
+            const autoProjects = [
+                { logo: 'volkswagen/00337F', name: 'Volkswagen', title: 'Lançamento de Novo SUV', strategy: 'Campanhas de vídeo no YouTube, conteúdo com influenciadores e geração de leads para test-drive.', result: '+25.000', sub: 'Leads para Test-Drive' },
+                { logo: 'toyota/EB0A1E', name: 'Toyota', title: 'Campanha de Híbridos', strategy: 'SEO focado em sustentabilidade e conteúdo educativo sobre tecnologia híbrida.', result: '#1', sub: 'em Share of Voice para Híbridos' },
+                { logo: 'ferrari/D40000', name: 'Ferrari', title: 'Geração de Leads de Ultra Luxo', strategy: 'Eventos exclusivos, marketing de relacionamento (CRM) e parcerias com marcas de luxo.', result: '+200%', sub: 'em Leads de Alta Qualificação' },
+                { logo: 'bmw/0066B1', name: 'BMW', title: 'Experiência de Marca Premium', strategy: 'Eventos exclusivos, automação de CRM e produção de conteúdo de alta qualidade.', result: '9.8/10', sub: 'em Satisfação do Cliente (NPS)' },
+                { logo: 'jeep/000000', name: 'Jeep', title: 'Construção de Comunidade', strategy: 'Criação de eventos de aventura (Jeep Experience) e plataforma de conteúdo para proprietários.', result: '+500K', sub: 'Membros Engajados na Comunidade' },
+                { logo: 'porsche/B12B2F', name: 'Porsche', title: 'Aceleração de Vendas Digitais', strategy: 'Configurador online de veículos com UX aprimorada e campanhas de retargeting para usuários engajados.', result: '+60%', sub: 'em Vendas Iniciadas Online' },
+                { logo: 'audi/000000', name: 'Audi', title: 'Posicionamento de Veículos Elétricos', strategy: 'Conteúdo educativo em vídeo, parcerias com canais de tecnologia e uma robusta campanha de PR.', result: '+300%', sub: 'em Buscas pela Linha e-tron' },
+                { logo: 'hyundai/002C5F', name: 'Hyundai', title: 'Otimização para Concessionárias', strategy: 'Campanhas geolocalizadas no Google/Waze e dashboards em Power BI para monitorar performance.', result: '3.2x', sub: 'Aumento na Taxa de Visitas às Lojas' },
+                { logo: 'honda/0000FF', name: 'Honda', title: 'Lançamento de Modelo Híbrido', strategy: 'Campanhas de vídeo e eventos de test-drive, com foco em sustentabilidade.', result: '+20.000', sub: 'Test-Drives Realizados' },
+                { logo: 'ford/FF0000', name: 'Ford', title: 'Retorno ao Mercado', strategy: 'Campanhas multicanal e parcerias com influencers de off-road.', result: '+15%', sub: 'em Market Share' },
+                { logo: 'renault/FFBF00', name: 'Renault', title: 'Aumento de Vendas Online', strategy: 'SEO e campanhas de performance para concessionárias.', result: '+25%', sub: 'em Vendas Digitais' },
+                { logo: 'fiat/FF0000', name: 'Fiat', title: 'Engajamento Jovem', strategy: 'TikTok Ads e parcerias com criadores de conteúdo jovem.', result: '+1M', sub: 'Interações' },
+                { logo: 'chevrolet/0000FF', name: 'Chevrolet', title: 'Otimização de Campanhas', strategy: 'Google Ads e análise de dados em tempo real.', result: '5:1', sub: 'ROAS' },
+                { logo: 'nissan/FF0000', name: 'Nissan', title: 'Lançamento Elétrico', strategy: 'Conteúdo educativo e parcerias com ONGs ambientais.', result: '+50K', sub: 'Pré-vendas' },
+                { logo: 'tesla/000000', name: 'Tesla', title: 'Expansão no Brasil', strategy: 'Campanhas globais adaptadas e eventos exclusivos.', result: '+100K', sub: 'Leads Gerados' }
+            ];
+
+            const deliveryProjects = [
+                { logo: 'ifood/EA1D2C', name: 'iFood', title: 'Aumento do Ticket Médio', strategy: 'Campanhas de "compre junto", cupons progressivos e CRM.', result: '+15%', sub: 'no Valor do Pedido Médio' },
+                { logo: 'rappi/00C853', name: 'Rappi', title: 'Expansão de Mercado', strategy: 'Campanhas geolocalizadas e parcerias com varejo local.', result: '+2M', sub: 'Novos Usuários' },
+                { logo: 'ubereats/000000', name: 'Uber Eats', title: 'Otimização de Logística', strategy: 'Análise de dados e automação de rotas.', result: '-20%', sub: 'no Tempo de Entrega' },
+                { logo: 'glovo/FF1493', name: 'Glovo', title: 'Aumento de Parceiros', strategy: 'Campanhas de onboarding e incentivos para restaurantes.', result: '+500', sub: 'Novos Parceiros' },
+                { logo: 'jamesdelivery/000000', name: 'James Delivery', title: 'Qualidade de Serviço', strategy: 'Treinamento de entregadores e campanhas de awareness.', result: '4.8/5', sub: 'em Avaliação de Clientes' },
+                { logo: '99food/000000', name: '99Food', title: 'Crescimento Regional', strategy: 'Parcerias locais e promoções sazonais.', result: '+1M', sub: 'Pedidos em 6 Meses' },
+                { logo: 'deliverymuch/FF4500', name: 'Delivery Much', title: 'Expansão de Cidades', strategy: 'Campanhas de marketing local e SEO.', result: '+15', sub: 'Novas Cidades Cobertas' },
+                { logo: 'querodelivery/00AEEF', name: 'Quero Delivery', title: 'Aumento de Tráfego', strategy: 'SEO e campanhas em redes sociais.', result: '+500K', sub: 'Visitas Mensais' },
+                { logo: 'keeta/000000', name: 'Keeta', title: 'Lançamento no Brasil', strategy: 'Campanhas multicanal e parcerias com influencers.', result: '+3M', sub: 'Downloads' },
+                { logo: 'zubale/FF00FF', name: 'Zubale', title: 'Otimização de Logística', strategy: 'Análise de dados e automação de entregas.', result: '-15%', sub: 'no Custo Operacional' },
+                { logo: 'petcopter/000000', name: 'PetCopter', title: 'Serviço Inovador', strategy: 'Campanhas de awareness e geolocalização.', result: '+10K', sub: 'Usuários Ativos' }
+            ];
+
+            const certifications = [
+                { logo: 'google/4285F4', name: 'Google', description: 'Ads (Search, Display, Video, PMax), Analytics (GA4), Looker Studio, GTM.' },
+                { logo: 'meta/0062E0', name: 'Meta', description: 'Media Buying Pro, Marketing Science, Blueprint.' },
+                { logo: 'hubspot/FF7A59', name: 'HubSpot', description: 'Inbound Marketing, Lead Scoring, CRM Certification.' },
+                { logo: 'salesforce/00A1E0', name: 'Salesforce', description: 'Marketing Cloud, Trailhead Certifications.' },
+                { logo: 'tiktok/000000', name: 'TikTok', description: 'TikTok Ads Certification.' },
+                { logo: 'microsoft/0078D4', name: 'Microsoft', description: 'Power BI, Azure Fundamentals.' },
+                { logo: 'semrush/FF642D', name: 'Semrush', description: 'SEO Toolkit, PPC Fundamentals.' },
+                { logo: 'pmi/2D2E68', name: 'PMI', description: 'PMP Certification.' },
+                { logo: 'coursera/0056D6', name: 'Coursera', description: 'Growth Hacking (UVA), Digital Marketing (Illinois).' },
+                { logo: 'hootsuite/00C853', name: 'Hootsuite', description: 'Social Marketing Certification.' },
+                { logo: 'adobe/FF0000', name: 'Adobe', description: 'Photoshop, Premiere Pro Certifications.' },
+                { logo: 'figma/000000', name: 'Figma', description: 'UI/UX Design Certification.' },
+                { logo: 'tableau/00AEEF', name: 'Tableau', description: 'Desktop Specialist Certification.' },
+                { logo: 'aws/FF9900', name: 'AWS', description: 'Certified Data Analytics – Specialty.' },
+                { logo: 'prince2/2E2E68', name: 'PRINCE2', description: 'Foundation Certification.' },
+                { logo: 'talentsmart/000000', name: 'TalentSmart', description: 'Emotional Intelligence Certification.' }
+            ];
+
+            // Expor dados para o Alpine.js
+            window.fintechProjects = fintechProjects;
+            window.varejoProjects = varejoProjects;
+            window.autoProjects = autoProjects;
+            window.deliveryProjects = deliveryProjects;
+            window.certifications = certifications;
+        });
+    </script>
+</body>
+</html>
